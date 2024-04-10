@@ -1,8 +1,10 @@
-"use client"
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export default function Home() {
   return (
     <div>
+      <Header />
       <main>
         <section className='flex flex-col items-center justify-center'>
           <div className='flex items-center justify-center my-12'>
@@ -60,6 +62,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
