@@ -1,33 +1,23 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from 'next/server';
 import mysql from 'mysql2/promise';
-import { GetDBSettings } from "../sharedCode/common";
 
-let connectionParams = GetDBSettings();
+export async function GET(req, res) {
 
-export async function GET(request) {
+    const dbconnection = await mysql.createConnection({
+        host: '73.79.171.54',
+        port: '3306',
+        user: 'martin',
+        password: 'SeniorCapstone2024!',
+        database: 'peer-mentor'
+    })
 
     try {
-        const connection = await mysql.createConnection(connectionParams);
-
-        let get_exp_query = "";
-        get_exp_query = "SELECT * FROM mentor.PeerMentor";
-
-        let values = [];
-
-        const [results] = await connection.execute(get_exp_query, values);
-
-        connection.end();
-
-        return NextResponse.json(results)
-
-    } catch(err) {
-        console.log('ERROR: API - ', err.message);
-
-        const results = {
-            error: err.message,
-            returnedStatus: 200,
-        };
-
-        return NextResponse.json(response, { status: 200 });
+        const [rows, fields] = await dbconnection.execute('SELECT * FROM Mentor');
+        return NextResponse.json({ mentors: rows });
+    } catch (error) {
+        return NextResponse.error({ error: error.message });
+    } finally {
+        await dbconnection.end();
     }
+
 }
