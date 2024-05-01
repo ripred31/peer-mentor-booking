@@ -1,9 +1,23 @@
+'use client'
+
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Calendar from "../components/Calendar"
+import React, { useEffect, useState } from 'react';
 
 export default function Dashboard() {
+    const [userName, setUserName] = useState(null);
+
+    useEffect(() => {
+        async function fetchUserData() {
+            const response = await fetch('/api/getUserName');
+            const userData = await response.json();
+            setUserName(userData.userInfo.Name);
+        }
+
+        fetchUserData();
+    }, []);
 
     return(
         <div className="h-full">
@@ -13,7 +27,7 @@ export default function Dashboard() {
                 <div>
                     <Calendar />
                     <h1>
-                        Hello (user_name)
+                        Hello {userName}
                     </h1>
                 </div>
             </main>
