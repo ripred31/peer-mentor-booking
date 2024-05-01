@@ -6,7 +6,7 @@ export async function GET(req, res) {
     const searchParams = new URLSearchParams(url.searchParams);
     const id = searchParams.get('id');
 
-    console.log('ID:', id); // Log the value of 'id'
+    console.log('ID:', id);
 
     if (!id) {
         return NextResponse.error({ error: 'Missing ID parameter' }, 400);
