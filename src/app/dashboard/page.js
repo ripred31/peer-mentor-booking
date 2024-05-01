@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Dashboard() {
     const [userInfo, setUserInfo] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
         async function fetchUserData() {
@@ -27,19 +28,26 @@ export default function Dashboard() {
         fetchUserData();
     }, []);
 
+    const handleDateSelect = (date) => {
+        setSelectedDate(date);
+    };
+
+    console.log('dashboard: ', selectedDate)
+
     return(
         <div className="h-full">
             <Header />
             <main className="flex">
                 <Navbar />
                 <div>
-                    <Calendar />
+                    <Calendar onChange={handleDateSelect}/>
                     <h1>
                         Hello {userInfo?.Name}
                     </h1>
                     <h2>
                         Your email is: {userInfo?.Email}
                     </h2>
+                    <h3>Selected date is: {selectedDate ? selectedDate.toString() : ''}</h3>
                     <MentorSelect />
                 </div>
             </main>
