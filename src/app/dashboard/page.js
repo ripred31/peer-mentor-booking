@@ -5,11 +5,13 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Calendar from "../components/Calendar"
 import MentorSelect from "../components/MentorSelect"
-import React, { useEffect, useState } from 'react';
+import BookingModal from "../components/BookingModal"
+import React, { Fragment, useEffect, useState } from 'react';
 
 export default function Dashboard() {
     const [userInfo, setUserInfo] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         async function fetchUserData() {
@@ -35,24 +37,36 @@ export default function Dashboard() {
     console.log('dashboard: ', selectedDate)
 
     return(
-        <div className="h-full">
-            <Header />
-            <main className="flex">
-                <Navbar />
-                <div>
-                    <Calendar onChange={handleDateSelect}/>
-                    <h1>
-                        Hello {userInfo?.Name}
-                    </h1>
-                    <h2>
-                        Your email is: {userInfo?.Email}
-                    </h2>
-                    <h3>Selected date is: {selectedDate ? selectedDate.toString() : ''}</h3>
-                    <MentorSelect />
-                </div>
-            </main>
-            <Footer />
-        </div>
+        <Fragment>
+            <div className="h-full">
+                <Header />
+                <main className="flex">
+                    <Navbar />
+                    <div>
+                        <Calendar onChange={handleDateSelect}/>
+                        <button 
+                            className="text-white bg-rose-900 hover:bg-rose-700 px-6 py-2 rounded-md"
+                            onClick={() => setShowModal(true)}
+                        >
+                            Add Event
+                        </button>
+                        <BookingModal 
+                            isVisible={showModal}
+                            onClose={() => setShowModal(false)} 
+                        />
+                        <h1>
+                            Hello {userInfo?.Name}
+                        </h1>
+                        <h2>
+                            Your email is: {userInfo?.Email}
+                        </h2>
+                        <h3>Selected date is: {selectedDate ? selectedDate.toString() : ''}</h3>
+                        <MentorSelect />
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        </Fragment>
     )
 
 }
