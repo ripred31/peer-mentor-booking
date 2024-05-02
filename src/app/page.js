@@ -1,12 +1,18 @@
+'use client'
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   return (
     <div>
       <Header />
       <main>
         <section className='flex flex-col items-center justify-center'>
+          <div className="flex items-center justify-between mt-8">
+                        <button type="button" onClick={() => router.push('/sign-in')} className="bg-rose-700 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Schedule an Appointment</button>
+                    </div>
           <div className='flex items-center justify-center my-12'>
             <h2 className='font-bold text-2xl'>
               Our Mission
