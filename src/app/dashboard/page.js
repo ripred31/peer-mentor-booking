@@ -16,7 +16,8 @@ export default function Dashboard() {
     useEffect(() => {
         async function fetchUserData() {
             try {
-                const response = await fetch('/api/getUserInfo?id=1');
+                const userID = localStorage.getItem('UserID');
+                const response = await fetch(`/api/getUserInfo?id=${userID}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
@@ -52,7 +53,8 @@ export default function Dashboard() {
                         </button>
                         <BookingModal 
                             isVisible={showModal}
-                            onClose={() => setShowModal(false)} 
+                            onClose={() => setShowModal(false)}
+                            selectedDate={selectedDate} 
                         />
                         <h1>
                             Hello {userInfo?.Name}

@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
-export default function MentorDropdown() {
-    const [mentorNames, setMentorNames] = useState([]);
+export default function MentorDropdown({ onMentorSelect }) {
+    const [mentors, setMentors] = useState([]);
     const [selectedMentor, setSelectedMentor] = useState('');
 
     useEffect(() => {
-        async function fetchMentorNames() {
+        async function fetchMentors() {
             try {
                 const response = await fetch('/api/getAllMentors');
                 if (!response.ok) {
-                    throw new Error('Failed to fetch mentor names');
+                    throw new Error('Failed to fetch mentors');
                 }
                 const data = await response.json();
-                setMentorNames(data.mentorNames);
+                setMentors(data.mentors);
             } catch (error) {
-                console.error('Error fetching mentor names:', error);
+                console.error('Error fetching mentors:', error);
             }
         }
 
-        fetchMentorNames();
+        fetchMentors();
     }, []);
 
     const handleChange = (event) => {
         setSelectedMentor(event.target.value);
+        if (onMentorSelect) {
+            onMentorSelect(event.target.value);
+        }
     };
 
     return (
@@ -30,11 +33,11 @@ export default function MentorDropdown() {
             <h1>Mentor Dropdown</h1>
             <select value={selectedMentor} onChange={handleChange}>
                 <option value="">Select a mentor</option>
-                {mentorNames.map((name, index) => (
-                    <option key={index} value={name}>{name}</option>
+                {mentors.map((mentor, index) => (
+                    <option key={index} value={mentor.mentorID}>{mentor.name}</option>
                 ))}
             </select>
-            <p>Selected mentor: {selectedMentor}</p>
+            <p>Selected mentor ID: {selectedMentor}</p>
         </div>
     );
 }
