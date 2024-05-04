@@ -4,8 +4,15 @@ const TimeSelect = ({ onChange }) => {
   const [hours, setHours] = useState('00');
   const [minutes, setMinutes] = useState('00');
 
-  const handleHourChange = (e) => setHours(e.target.value);
-  const handleMinuteChange = (e) => setMinutes(e.target.value);
+  const handleHourChange = (e) => {
+    setHours(e.target.value);
+    onChange(`${e.target.value}:${minutes}:00`);
+  };
+
+  const handleMinuteChange = (e) => {
+    setMinutes(e.target.value);
+    onChange(`${hours}:${e.target.value}:00`);
+  };
 
   return (
     <div>

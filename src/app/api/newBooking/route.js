@@ -1,8 +1,15 @@
 import { NextResponse } from 'next/server';
 import mysql from 'mysql2/promise';
+import dayjs from 'dayjs';
 
-export async function POST(req, res) {
-    const { UserID, selectedDate, selectedTime, mentorID, location } = req.body;
+export async function GET(req, res) {
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.searchParams);
+    const UserID = searchParams.get('UserID');
+    const mentorID = searchParams.get('mentorID');
+    const location = searchParams.get('location');
+    const selectedDate = searchParams.get('selectedDate');
+    const selectedTime = searchParams.get('selectedTime');
 
     const dbconnection = await mysql.createConnection({
         host: process.env.DB_HOST,
@@ -16,13 +23,12 @@ export async function POST(req, res) {
         const [menteeRows] = await dbconnection.execute('SELECT MenteeID FROM Mentee WHERE UserID = ?', [UserID]);
         const menteeID = menteeRows[0].MenteeID;
 
-        const [bookingIDRows] = await dbconnection.execute('SELECT MAX(BookingID) as maxBookingID FROM Booking');
-        const bookingID = bookingIDRows[0].maxBookingID + 1;
+        const formattedDate = dayjs(selectedDate).format('YYYY-MM-DD');
 
-        // await dbconnection.execute(
-        //     'INSERT INTO Booking (BookingID, MenteeID, MentorID, Location, Date, Time, Status) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        //     [bookingID, menteeID, mentorID, location, selectedDate, selectedTime, 'Pending']
-        // );
+        await dbconnection.execute(
+            'INSERT INTO Booking (MenteeID, MentorID, Location, Date, Time, Status) VALUES (?, ?, ?, ?, ?, ?)',
+            [menteeID, mentorID, location, formattedDate, selectedTime, 'Pending']
+        );
 
         return NextResponse.json({ message: 'Booking created successfully' });
     } catch (error) {
