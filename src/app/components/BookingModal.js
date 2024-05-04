@@ -5,8 +5,27 @@ import React, { useState } from 'react';
 
 export default function BookingModal({ isVisible, onClose, selectedDate }) {
     const [selectedMentorID, setSelectedMentorID] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const [location, setLocation] = useState('');
+
+    const userID = localStorage.getItem('UserID');
 
     if( !isVisible ) return null;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const url = `/api/newBooking?UserID=${userID}&selectedDate=${sqlDate}&selectedTime=${selectedTime}&mentorID=${selectedMentorID}&location=${location}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to create booking');
+            }
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error creating booking:', error);
+        }
+    };
 
     const handleClose = (e) => {
         if( e.target.id === "wrapper") onClose()
@@ -18,7 +37,21 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
         setSelectedMentorID(mentorID);
     };
 
-    console.log(selectedMentorID)
+    const handleTimeSelect = (time) => {
+        setSelectedTime(time);
+    };
+
+    const handleLocationChange = (e) => {
+        setLocation(e.target.value);
+    };
+
+    const sqlDate = dayjs(formattedDate).format('YYYY-MM-DD');
+
+    console.log("Our data: ")
+    console.log("Formatted date:", sqlDate)
+    console.log("Mentor ID:", selectedMentorID)
+    console.log("Selected time:", selectedTime)
+    console.log("Location: ", location)
 
     return(
         <div 
@@ -38,7 +71,7 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
                         <h3 className="font-medium">
                             Create Booking
                         </h3>
-                        <form method="post" action="/api/createBooking">
+                        <form method="post" onSubmit={handleSubmit}>
                             <div>
                                 <label>
                                     Selected Date: {formattedDate}
@@ -47,11 +80,17 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
                                     <MentorDropdown onMentorSelect={handleMentorSelect} />
                                 </div>
                                 <div className='mt-4'>
-                                    <TimeSelect />
+                                    <TimeSelect onChange={handleTimeSelect} />
                                 </div>
                                 <div className='mt-4'>
                                     <label htmlFor="location">Location:</label>
-                                    <input type="text" id="location" name="location" />
+                                    <input
+                                        type="text"
+                                        id="location"
+                                        name="location"
+                                        value={location}
+                                        onChange={handleLocationChange}
+                                    />
                                 </div>
                                 <div className="mt-6">
                                     <input 
@@ -62,7 +101,6 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
