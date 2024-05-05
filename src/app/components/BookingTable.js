@@ -16,15 +16,29 @@ export default function BookingTable({ userId, selectedDate }) {
 
         fetchBookings();
     }, [userId, selectedDate]);
-    return(
+    return (
         <div>
             {bookings.map(booking => (
-                <div key={booking.bookingID}>
-                    <p>{booking.date} - {booking.time}</p>
-                    <p>{booking.location}</p>
-                    <p>{booking.status}</p>
+                <div key={booking.bookingID} className='my-4 border-2 rounded-lg p-4'>
+                    <div className='flex'>
+                        <label className='text-md font-bold mr-4'>Date:</label>
+                        <p>{booking.date} - {booking.time}</p>
+                    </div>
+                    <div className='flex'>
+                        <label className='text-md font-bold mr-4'>Location:</label>
+                        <p>{booking.location}</p>
+                    </div>
+                    <div className='flex'>
+                        <label className='text-md font-bold mr-4'>Mentor:</label>
+                        <p>{booking.mentorName}</p>
+                    </div>
+                    <div className='flex'>
+                        <label className='text-md font-bold mr-4'>Status:</label>
+                        <p>{booking.status}</p>
+                    </div>
                 </div>
             ))}
         </div>
-    )
+    );
+    
 }

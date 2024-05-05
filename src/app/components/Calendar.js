@@ -14,6 +14,21 @@ export default function BasicDateCalendar({ onChange }) {
     }
   };
 
+  const popperSx = {
+    "& .MuiPaper-root": {
+      backgroundColor: "rgba(120, 120, 120, 0.2)"
+    },
+    "& .MuiCalendarPicker-root": {
+      backgroundColor: "rgba(45, 85, 255, 0.4)"
+    },
+    "& .MuiPickersDay-dayWithMargin": {
+      color: "rgb(229,228,226)",
+      backgroundColor: "rgba(50, 136, 153)"
+    },
+    "& .MuiTabs-root": { backgroundColor: "rgba(120, 120, 120, 0.4)" }
+  };
+  
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar
