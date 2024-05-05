@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import mysql from 'mysql2/promise';
+import dayjs from 'dayjs';
 
 export async function GET(req, res) {
     const url = new URL(req.url);
     const searchParams = new URLSearchParams(url.searchParams);
     const userId = searchParams.get('userId');
-    const selectedDate = searchParams.get('selectedDate');
 
     const dbconnection = await mysql.createConnection({
         host: process.env.DB_HOST,
@@ -16,7 +16,6 @@ export async function GET(req, res) {
     });
 
     try {
-        // Query user type based on UserID
         const [userRows, userFields] = await dbconnection.execute('SELECT UserType FROM User WHERE UserID = ?', [userId]);
         if (userRows.length === 0) {
             return NextResponse.error({ error: 'User not found' });
@@ -34,49 +33,27 @@ export async function GET(req, res) {
             return NextResponse.error({ error: 'Invalid user type' });
         }
 
-        // Fetch the ID (MentorID or MenteeID) based on user type
         const [idRows, idFields] = await dbconnection.execute(idQuery, [userId]);
         if (idRows.length === 0) {
             return NextResponse.error({ error: `${userType} ID not found` });
         }
         const id = idRows[0][idField];
 
-        // Fetch bookings based on user type
-        const query = `
-                        SELECT 
-                            Booking.BookingID, 
-                            Booking.MenteeID, 
-                            Booking.MentorID, 
-                            Booking.Location, 
-                            Booking.Date, 
-                            Booking.Time, 
-                            Booking.Status, 
-                            User.Name AS MentorName, 
-                            User.Email AS MentorEmail
-                        FROM 
-                            Booking
-                        JOIN 
-                            Mentor ON Booking.MentorID = Mentor.MentorID
-                        JOIN 
-                            User ON Mentor.UserID = User.UserID
-                        WHERE 
-                            ${idField} = ? AND 
-                            Date = ?
-                    `;
-        const [bookingRows, bookingFields] = await dbconnection.execute(query, [id, selectedDate]);
+        console.log('ID field:', idField)
+
+        const today = dayjs().format('YYYY-MM-DD');
+        const twoWeeksAhead = dayjs().add(2, 'weeks').format('YYYY-MM-DD');
+        const query = `SELECT * FROM Booking WHERE ${idField} = ? AND Date >= ? AND Date <= ?`;
+        const [bookingRows, bookingFields] = await dbconnection.execute(query, [id, today, twoWeeksAhead]);
         const bookings = bookingRows.map(row => ({
             bookingID: row.BookingID,
             menteeID: row.MenteeID,
             mentorID: row.MentorID,
-            mentorName: row.MentorName,
-            mentorEmail: row.MentorEmail,
             location: row.Location,
             date: row.Date,
             time: row.Time,
             status: row.Status
         }));
-                    
-
 
         return NextResponse.json({ bookings });
     } catch (error) {

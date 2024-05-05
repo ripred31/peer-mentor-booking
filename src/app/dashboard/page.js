@@ -4,18 +4,19 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Calendar from "../components/Calendar"
-import MentorSelect from "../components/MentorSelect"
 import BookingModal from "../components/BookingModal"
 import BookingTable from "../components/BookingTable"
+import UpcomingBookings from "../components/UpcomingBookings"
 import React, { Fragment, useEffect, useState } from 'react';
 import dayjs from "dayjs"
+import { Upcoming } from "@mui/icons-material"
 
 export default function Dashboard() {
     const [userInfo, setUserInfo] = useState(null);
     const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
     const [showModal, setShowModal] = useState(false);
 
-    const userID = localStorage.getItem('UserID');
+    const userID = typeof window !== 'undefined' ? localStorage.getItem('UserID') : null;
 
     useEffect(() => {
         async function fetchUserData() {
@@ -46,7 +47,7 @@ export default function Dashboard() {
                 <Header />
                 <main className="flex">
                     <Navbar />
-                    <div>
+                    <div className="mx-16 my-4">
                         <Calendar 
                             onChange={handleDateSelect}
                             defaultDates={[dayjs()]}
@@ -71,12 +72,16 @@ export default function Dashboard() {
                         </h2>
                         <h3>Selected date is: {formattedDate}</h3>
                     </div>
-                    <div className="mx-6 my-4">
-                        <h2 className="text-lg font-bold">Upcoming meetings:</h2>
+                    <div className="mx-16 my-4">
+                        <h2 className="text-lg font-bold">Meetings for - {formattedDate}:</h2>
                         <BookingTable
                             userId={userID}
                             selectedDate={selectedDate}
                         />
+                    </div>
+                    <div className="mx-16 my-4">
+                        <h2 className="text-lg font-bold">Upcoming Meetings:</h2>
+                        <UpcomingBookings userId={userID} />
                     </div>
                 </main>
                 <Footer />
