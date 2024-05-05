@@ -70,7 +70,6 @@ export default function Dashboard() {
                             Your email is: {userInfo?.Email}
                         </h2>
                         <h3>Selected date is: {formattedDate}</h3>
-                        <MentorSelect />
                     </div>
                     <div className="mx-6 my-4">
                         <h2 className="text-lg font-bold">Upcoming meetings:</h2>

@@ -31,7 +31,12 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
     };
 
     const handleClose = (e) => {
-        if( e.target.id === "wrapper") onClose()
+        if( e.target.id === "wrapper") {
+            onClose();
+            setSelectedMentorID('');
+            setSelectedTime('');
+            setLocation('');
+        }
     }
 
     const handleMentorSelect = (mentorID) => {
@@ -46,6 +51,8 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
         setLocation(e.target.value);
     };
 
+    const isFormValid = selectedMentorID && selectedTime && location;
+
     return(
         <div 
             className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
@@ -55,7 +62,12 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
             <div className="w-[600px] flex flex-col">
                 <button 
                     className="text-white text-xl place-self-end"
-                    onClick={() => onClose()}
+                    onClick={() => {
+                        onClose();
+                        setSelectedMentorID('');
+                        setSelectedTime('');
+                        setLocation('');
+                    }}
                 >
                     X
                 </button>
@@ -69,12 +81,15 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
                                 <label>
                                     Selected Date: {formattedDate}
                                 </label>
+                                {/** Mentor Dropdown */}
                                 <div className='mt-4'>
                                     <MentorDropdown onMentorSelect={handleMentorSelect} />
                                 </div>
+                                {/** Time Select */}
                                 <div className='mt-4'>
                                     <TimeSelect onChange={handleTimeSelect} />
                                 </div>
+                                {/** Location input */}
                                 <div className='mt-4'>
                                     <label htmlFor="location">Location:</label>
                                     <input
@@ -89,7 +104,8 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
                                     <input 
                                         type="submit" 
                                         value="Submit" 
-                                        className="bg-rose-900 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded" 
+                                        className={`bg-rose-900 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        disabled={!selectedMentorID || !selectedTime || !location}
                                     />
                                 </div>
                             </div>
