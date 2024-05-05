@@ -3,12 +3,15 @@ import MentorDropdown from './MentorSelect';
 import TimeSelect from './TimeSelect';
 import React, { useState } from 'react';
 
-export default function BookingModal({ isVisible, onClose, selectedDate }) {
+export default function BookingModal({ isVisible, onClose, selectedDate, userId }) {
     const [selectedMentorID, setSelectedMentorID] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [location, setLocation] = useState('');
 
-    const userID = localStorage.getItem('UserID');
+    const userID = userId;
+
+    const formattedDate = selectedDate ? dayjs(selectedDate).format('ddd, DD MMM YYYY') : '';
+    const sqlDate = dayjs(formattedDate).format('YYYY-MM-DD');
 
     if( !isVisible ) return null;
 
@@ -31,8 +34,6 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
         if( e.target.id === "wrapper") onClose()
     }
 
-    const formattedDate = selectedDate ? dayjs(selectedDate).format('ddd, DD MMM YYYY') : '';
-
     const handleMentorSelect = (mentorID) => {
         setSelectedMentorID(mentorID);
     };
@@ -44,14 +45,6 @@ export default function BookingModal({ isVisible, onClose, selectedDate }) {
     const handleLocationChange = (e) => {
         setLocation(e.target.value);
     };
-
-    const sqlDate = dayjs(formattedDate).format('YYYY-MM-DD');
-
-    console.log("Our data: ")
-    console.log("Formatted date:", sqlDate)
-    console.log("Mentor ID:", selectedMentorID)
-    console.log("Selected time:", selectedTime)
-    console.log("Location: ", location)
 
     return(
         <div 
