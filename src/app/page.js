@@ -2,9 +2,22 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react';
 
 export default function Home() {
+
   const router = useRouter()
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.removeItem('UserID');
+    }, 1000);
+
+    router.push('/');
+
+    return () => clearTimeout(timeout);
+  }, [router]);
+
   return (
     <div>
       <Header />

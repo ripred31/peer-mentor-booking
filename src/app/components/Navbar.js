@@ -13,7 +13,7 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div>
-                    <Link href="/sign-out">
+                    <Link href="/">
                         <p className="block py-2 px-4 text-white hover:bg-rose-700 rounded-md">Sign Out</p>
                     </Link>
                 </div>
