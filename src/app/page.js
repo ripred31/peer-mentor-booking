@@ -57,13 +57,13 @@ export default function Home() {
             <div>
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Polly</h3>
-              <p className="text-md">Insert bio here!</p>
+              <p className="text-md">Graduate student Mentor and Health Science/Physician Assistant</p>
             </div>
             <div className="clear-left"></div>
             <div className="mt-12">
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Lexi</h3>
-              <p className="text-md">Insert bio here!</p>
+              <p className="text-md">Peer Mentor and Social Work</p>
             </div>
           </div>
         </div>
