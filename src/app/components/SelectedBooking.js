@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Button from './Button';
 
 export default function SelectedBooking({ bookingId }) {
     const [booking, setBooking] = useState(null);
@@ -17,7 +18,6 @@ export default function SelectedBooking({ bookingId }) {
                 const data = await response.json();
                 setBooking(data[0]);
                 setLoading(false);
-                console.log("Data in SelectedBooking: ", data);
             } catch (error) {
                 setError(error.message);
                 setLoading(false);
@@ -49,12 +49,18 @@ export default function SelectedBooking({ bookingId }) {
             <div>
                 <strong>Mentor ID:</strong> {booking.mentorID}<br />
                 <strong>Mentee ID:</strong> {booking.menteeID}<br />
+                <strong>Mentor Name:</strong> {booking.name}<br />
+                <strong>Mentor Email:</strong> {booking.email}<br />
                 <strong>Location:</strong> {booking.location}<br />
                 <strong>Date:</strong> {booking.date}<br />
                 <strong>Time:</strong> {booking.time}<br />
                 <strong>Status:</strong> {booking.status}<br />
                 <strong>Area of Expertise:</strong> {booking.areaOfExpertise}<br />
                 <strong>Bio:</strong> {booking.bio}<br />
+            </div>
+            <div className='flex justify-between mt-4'>
+                <Button method='confirm'/>
+                <Button method='cancel'/>
             </div>
         </div>
     );
