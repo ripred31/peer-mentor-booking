@@ -7,6 +7,7 @@ import Calendar from "../components/Calendar"
 import BookingModal from "../components/BookingModal"
 import BookingTable from "../components/BookingTable"
 import UpcomingBookings from "../components/UpcomingBookings"
+import SelectedBooking from "../components/SelectedBooking"
 import React, { Fragment, useEffect, useState } from 'react';
 import dayjs from "dayjs"
 import { Upcoming } from "@mui/icons-material"
@@ -45,7 +46,7 @@ export default function Dashboard() {
         <Fragment>
             <div className="h-full">
                 <Header />
-                <main className="flex">
+                <main className="flex h-full">
                     <Navbar />
                     <div className="mx-16 my-4">
                         <Calendar 
@@ -78,6 +79,10 @@ export default function Dashboard() {
                             userId={userID}
                             selectedDate={selectedDate}
                         />
+                    </div>
+                    <div className="mx-16 my-4">
+                        <h2 className="text-lg font-bold">Selected Booking:</h2>
+                        <SelectedBooking />
                     </div>
                     <div className="mx-16 my-4">
                         <h2 className="text-lg font-bold">Upcoming Meetings:</h2>
