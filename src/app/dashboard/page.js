@@ -16,6 +16,7 @@ export default function Dashboard() {
     const [userInfo, setUserInfo] = useState(null);
     const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
     const [showModal, setShowModal] = useState(false);
+    const [selectedBookingId, setSelectedBookingId] = useState(null);
 
     const userID = typeof window !== 'undefined' ? localStorage.getItem('UserID') : null;
 
@@ -23,24 +24,24 @@ export default function Dashboard() {
         async function fetchUserData() {
             try {
                 const response = await fetch(`/api/getUserInfo?id=${userID}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
                 const userData = await response.json();
                 setUserInfo(userData.userInfo);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         }
-
+    
         fetchUserData();
     }, []);
+    
 
     const handleDateSelect = (date) => {
         setSelectedDate(date);
     };
 
     const formattedDate = dayjs(selectedDate).format('ddd, DD MMM YYYY');
+
+    console.log("Selected Booking ID in Dashboard: ", selectedBookingId)
 
     return(
         <Fragment>
@@ -78,11 +79,13 @@ export default function Dashboard() {
                         <BookingTable
                             userId={userID}
                             selectedDate={selectedDate}
+                            setSelectedBookingId={setSelectedBookingId}
+                            selectedBookingId={selectedBookingId}
                         />
                     </div>
                     <div className="mx-16 my-4">
                         <h2 className="text-lg font-bold">Selected Booking:</h2>
-                        <SelectedBooking />
+                        <SelectedBooking bookingId={selectedBookingId} />
                     </div>
                     <div className="mx-16 my-4">
                         <h2 className="text-lg font-bold">Upcoming Meetings:</h2>
