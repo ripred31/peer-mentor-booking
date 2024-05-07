@@ -16,14 +16,12 @@ export async function GET(req, res) {
     });
 
     try {
-        // Fetch the MentorID based on UserID
         const [mentorIdRows, mentorIdFields] = await dbconnection.execute('SELECT MentorID FROM Mentor WHERE UserID = ?', [userId]);
         if (mentorIdRows.length === 0) {
             return NextResponse.error({ error: 'Mentor ID not found' });
         }
         const mentorId = mentorIdRows[0].MentorID;
 
-        // Fetch mentor bookings
         const query = `
             SELECT 
                 Booking.BookingID, 

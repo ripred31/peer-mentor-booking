@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
-export default function BookingTable({ userId, selectedDate }) {
+export default function BookingTable({ userId, selectedDate, selectedBookingId, setSelectedBookingId }) {
     const [bookings, setBookings] = useState([]);
     const [userType, setUserType] = useState('');
 
@@ -37,11 +37,19 @@ export default function BookingTable({ userId, selectedDate }) {
     
         fetchBookings();
     }, [userId, selectedDate, userType]);
-    
+
+    const handleBookingSelect = (bookingId) => {
+        setSelectedBookingId(Number(bookingId));
+    };
+
     return (
         <div>
             {bookings.map(booking => (
-                <div key={booking.bookingID} className='my-4 border-2 rounded-lg p-4'>
+                <div 
+                    key={booking.bookingID} 
+                    className={`my-4 border-2 rounded-lg p-4 ${selectedBookingId === booking.bookingID ? 'border-rose-900' : ''}`}
+                    onClick={() => handleBookingSelect(booking.bookingID)}
+                >
                     <div className='flex'>
                         <label className='text-md font-bold mr-4'>Date:</label>
                         <p>{booking.date} - {booking.time}</p>
