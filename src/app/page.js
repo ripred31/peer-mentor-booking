@@ -67,7 +67,7 @@ export default function Home() {
                 Polly
               </h3>
               <p>
-                Short bio or role description.
+                Graduate student Mentor and Health Science/Physician Assistant
               </p>
             </div>
             <div>
@@ -75,7 +75,7 @@ export default function Home() {
                 Lexi
               </h3>
               <p>
-                Short bio or role description.
+                Peer Mentor and Social Work
               </p>
             </div>
           </div>
