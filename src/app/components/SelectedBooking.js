@@ -6,8 +6,6 @@ export default function SelectedBooking({ bookingId }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    console.log("Booking ID in SelectedBooking.js: ", bookingId)
-
     useEffect(() => {
         const fetchBooking = async () => {
             try {
@@ -29,6 +27,8 @@ export default function SelectedBooking({ bookingId }) {
         }
     }, [bookingId]);
 
+    const isPending = booking.status === 'Pending';
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -40,8 +40,6 @@ export default function SelectedBooking({ bookingId }) {
     if (!booking) {
         return <div>No booking found</div>;
     }
-
-    console.log("Booking in SelectedBooking: ", booking);
 
     return (
         <div>
@@ -59,8 +57,8 @@ export default function SelectedBooking({ bookingId }) {
                 <strong>Bio:</strong> {booking.bio}<br />
             </div>
             <div className='flex justify-between mt-4'>
-                <Button method='confirm'/>
-                <Button method='cancel'/>
+                {isPending && <Button method='Confirm' bookingId={bookingId} />}
+                {isPending && <Button method='Cancel' bookingId={bookingId} />}
             </div>
         </div>
     );
