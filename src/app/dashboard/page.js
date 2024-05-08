@@ -41,14 +41,11 @@ export default function Dashboard() {
 
     const formattedDate = dayjs(selectedDate).format('ddd, DD MMM YYYY');
 
-    console.log("Selected Booking ID in Dashboard: ", selectedBookingId)
-
     return(
         <Fragment>
             <div className="h-full">
                 <Header />
                 <main className="flex h-full">
-                    <Navbar />
                     <div className="mx-16 my-4">
                         <Calendar 
                             onChange={handleDateSelect}
