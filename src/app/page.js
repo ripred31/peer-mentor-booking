@@ -71,7 +71,7 @@ export default function Home() {
             <div className="mt-12">
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Angel Mandoza</h3>
-              <p className="text-md">Computer Science,I joined Act101 because I was once a mentee and saw the amount of good I can do for this program. 
+              <p className="text-md">Computer Science, I joined Act101 because I was once a mentee and saw the amount of good I can do for this program. 
               The best part about mentoring is being that resource that mentees can depend on.</p>
             </div>
           </div>
