@@ -10,7 +10,6 @@ export default function Account() {
     return(
         <div>
             <Header />
-            <Navbar />
             <div>
                 <AccountForm userId={userID}/>
             </div>
