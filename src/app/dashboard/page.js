@@ -48,7 +48,6 @@ export default function Dashboard() {
             <div className="h-full">
                 <Header />
                 <main className="flex h-full">
-                    <Navbar />
                     <div className="mx-16 my-4">
                         <Calendar 
                             onChange={handleDateSelect}
