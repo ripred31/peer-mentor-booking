@@ -27,7 +27,7 @@ export default function SelectedBooking({ bookingId }) {
         }
     }, [bookingId]);
 
-    const isPending = booking.status === 'Pending';
+    const isPending = booking && booking.status === 'Pending';
 
     if (loading) {
         return <div>Loading...</div>;
