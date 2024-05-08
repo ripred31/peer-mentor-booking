@@ -21,13 +21,24 @@ export async function GET(req, res) {
     });
 
     try {
-        const [rows, fields] = await dbconnection.execute('SELECT * FROM User WHERE UserID = ?', [id]);
+        const [userRows, userFields] = await dbconnection.execute('SELECT * FROM User WHERE UserID = ?', [id]);
 
-        if (rows.length === 0) {
+        if (userRows.length === 0) {
             return NextResponse.error({ error: 'User not found' }, 404);
         }
 
-        return NextResponse.json({ userInfo: rows[0] });
+        let additionalInfo;
+        if (userRows[0].UserType === 'Mentee') {
+            const [menteeRows, menteeFields] = await dbconnection.execute('SELECT Bio, AreaOfNeed FROM Mentee WHERE UserID = ?', [id]);
+            additionalInfo = menteeRows[0];
+        } else if (userRows[0].UserType === 'Mentor') {
+            const [mentorRows, mentorFields] = await dbconnection.execute('SELECT Bio, AreaOfExpertise, Available FROM Mentor WHERE UserID = ?', [id]);
+            additionalInfo = mentorRows[0];
+        }
+
+        const userInfo = { ...userRows[0], ...additionalInfo };
+
+        return NextResponse.json({ userInfo });
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.error({ error: error.message });
