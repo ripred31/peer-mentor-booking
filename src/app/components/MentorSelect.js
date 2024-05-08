@@ -30,14 +30,13 @@ export default function MentorDropdown({ onMentorSelect }) {
 
     return (
         <div>
-            <h1>Mentor Dropdown</h1>
+            <h1 className="text-white text-xl">Mentor Dropdown</h1>
             <select value={selectedMentor} onChange={handleChange}>
                 <option value="">Select a mentor</option>
                 {mentors.map((mentor, index) => (
                     <option key={index} value={mentor.mentorID}>{mentor.name}</option>
                 ))}
             </select>
-            <p>Selected mentor ID: {selectedMentor}</p>
         </div>
     );
 }
