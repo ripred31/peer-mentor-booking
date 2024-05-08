@@ -15,7 +15,7 @@ const TimeSelect = ({ onChange }) => {
   };
 
   return (
-    <div>
+    <div className="text-lg">
       <select value={hours} onChange={handleHourChange}>
         {Array.from({ length: 24 }, (_, i) => (
           <option key={i} value={i.toString().padStart(2, '0')}>
