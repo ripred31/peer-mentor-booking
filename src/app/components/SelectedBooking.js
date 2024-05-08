@@ -45,10 +45,7 @@ export default function SelectedBooking({ bookingId }) {
 
     return (
         <div>
-            <h2>Selected Booking</h2>
             <div>
-                <strong>Mentor ID:</strong> {booking.mentorID}<br />
-                <strong>Mentee ID:</strong> {booking.menteeID}<br />
                 <strong>Mentor Name:</strong> {booking.name}<br />
                 <strong>Mentor Email:</strong> {booking.email}<br />
                 <strong>Location:</strong> {booking.location}<br />
