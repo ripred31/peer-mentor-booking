@@ -75,21 +75,30 @@ export default function AccountForm({ userId }) {
     
 
     return (
-        <div className="flex justify-center h-screen mt-16">
-            <form className="w-full max-w-lg" onSubmit={handleSubmit}>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" value={name} onChange={handleInputChange} /><br />
+        <div className="center my-16 m-auto bg-rose-900 w-5/12 p-6">
+            <div className='text-white font-bold text-3xl mb-8'>Account Settings</div>
+            <form onSubmit={handleSubmit}>
+                <div className='mb-4'>
+                    <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="name">Name:</label>
+                    <input className="pl-1 text-stone-800" type="text" id="name" name="name" value={name} onChange={handleInputChange} /><br />
+                </div>
 
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" value={email} onChange={handleInputChange} /><br />
+                <div className='mb-4'>
+                    <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="email">Email:</label>
+                    <input className="pl-1 text-stone-800" type="email" id="email" name="email" value={email} onChange={handleInputChange} /><br />
+                </div>
+                
+                <div className='mb-4'>
+                    <label className= "text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="bio">Bio:</label>
+                    <textarea className="p-1 text-stone-800 min-h-20 min-w-60 " id="bio" name="bio" value={bio} onChange={handleInputChange} /><br />
+                </div>
 
-                <label htmlFor="bio">Bio:</label>
-                <textarea id="bio" name="bio" value={bio} onChange={handleInputChange} /><br />
+                <div className='mb-4'>
+                    <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="areaOfNeed">Area of Need:</label>
+                    <input className="pl-1 text-stone-800" type="text" id="areaOfNeed" name="areaOfNeed" value={areaOfNeed} onChange={handleInputChange} /><br />
+                </div>
 
-                <label htmlFor="areaOfNeed">Area of Need:</label>
-                <input type="text" id="areaOfNeed" name="areaOfNeed" value={areaOfNeed} onChange={handleInputChange} /><br />
-
-                <button type="submit" disabled={isDisabled()}>Update</button>
+                <button className="text-lg text-white font-bold block ml-auto mr-6 p-2" type="submit" disabled={isDisabled()}>Update &raquo;</button>
             </form>
         </div>
     );
