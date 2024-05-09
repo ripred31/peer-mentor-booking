@@ -71,14 +71,14 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
                 >
                     X
                 </button>
-                <div className="bg-white p-2 rounded-md">
+                <div className="bg-rose-900 p-2 rounded-md">
                     <div className="p-6 text-left">
-                        <h3 className="font-medium">
+                        <h3 className="text-lg">
                             Create Booking
                         </h3>
                         <form method="post" onSubmit={handleSubmit}>
                             <div>
-                                <label>
+                                <label className="text-white">
                                     Selected Date: {formattedDate}
                                 </label>
                                 {/** Mentor Dropdown */}
@@ -86,11 +86,11 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
                                     <MentorDropdown onMentorSelect={handleMentorSelect} />
                                 </div>
                                 {/** Time Select */}
-                                <div className='mt-4'>
+                                <div className="text-lg">
                                     <TimeSelect onChange={handleTimeSelect} />
                                 </div>
                                 {/** Location input */}
-                                <div className='mt-4'>
+                                <div className="text-white text-lg">
                                     <label htmlFor="location">Location:</label>
                                     <input
                                         type="text"
