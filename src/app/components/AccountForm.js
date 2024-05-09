@@ -75,30 +75,30 @@ export default function AccountForm({ userId }) {
     
 
     return (
-        <div className="center my-16 m-auto bg-rose-900 w-5/12 p-6">
+        <div className="center my-16 m-auto bg-rose-900 w-5/12 p-6 rounded-lg">
             <div className='text-white font-bold text-3xl mb-8'>Account Settings</div>
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="name">Name:</label>
-                    <input className="pl-1 text-stone-800" type="text" id="name" name="name" value={name} onChange={handleInputChange} /><br />
+                    <input className="pl-1 text-stone-800 rounded-md" type="text" id="name" name="name" value={name} onChange={handleInputChange} /><br />
                 </div>
 
                 <div className='mb-4'>
                     <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="email">Email:</label>
-                    <input className="pl-1 text-stone-800" type="email" id="email" name="email" value={email} onChange={handleInputChange} /><br />
+                    <input className="pl-1 text-stone-800 rounded-md" type="email" id="email" name="email" value={email} onChange={handleInputChange} /><br />
                 </div>
                 
                 <div className='mb-4'>
                     <label className= "text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="bio">Bio:</label>
-                    <textarea className="p-1 text-stone-800 min-h-20 min-w-60 " id="bio" name="bio" value={bio} onChange={handleInputChange} /><br />
+                    <textarea className="p-1 text-stone-800 min-h-20 min-w-60 rounded-md" id="bio" name="bio" value={bio} onChange={handleInputChange} /><br />
                 </div>
 
                 <div className='mb-4'>
                     <label className="text-rose-100 font-bold mx-2 inline-block text-right w-3/12" htmlFor="areaOfNeed">Area of Need:</label>
-                    <input className="pl-1 text-stone-800" type="text" id="areaOfNeed" name="areaOfNeed" value={areaOfNeed} onChange={handleInputChange} /><br />
+                    <input className="pl-1 text-stone-800 rounded-md" type="text" id="areaOfNeed" name="areaOfNeed" value={areaOfNeed} onChange={handleInputChange} /><br />
                 </div>
 
-                <button className="text-lg text-white font-bold block ml-auto mr-6 p-2" type="submit" disabled={isDisabled()}>Update &raquo;</button>
+                <button className="text-lg text-white border-2 rounded-md  font-bold block ml-auto mr-6 p-2 hover:bg-rose-700" type="submit" disabled={isDisabled()}>Update &raquo;</button>
             </form>
         </div>
     );
