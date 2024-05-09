@@ -73,7 +73,7 @@ export default function BookingModal({ isVisible, onClose, selectedDate, userId 
                 </button>
                 <div className="bg-rose-900 p-2 rounded-md">
                     <div className="p-6 text-left">
-                        <h3 className="text-lg">
+                        <h3 className="text-white text-lg">
                             Create Booking
                         </h3>
                         <form method="post" onSubmit={handleSubmit}>
