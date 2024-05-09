@@ -58,21 +58,21 @@ export default function Home() {
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Polly Canete</h3>
               <p className="text-md">Physician Assistant Graduate Student. Ive been working for Act101 since 2021 my sophomore year. 
-              What I enjoy most about the job is seeing my mentees progress closer to graduation and develop to be mature, amazing huiman beings</p>
+              What I enjoy most about the job is seeing my mentees progress closer to graduation and develop to be mature, amazing human beings</p>
             </div>
             <div className="clear-left"></div>
             <div className="mt-12">
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Lexi Grier</h3>
               <p className="text-md">Social Work, my career goal is to help people like my parents so that they can see a future for themselves outside of addiction.
-              My favorite part about Act101 mentoring is meeting new people and helping students ge through college.</p>
+              My favorite part about Act101 mentoring is meeting new people and helping students get through college.</p>
             </div>
             <div className="clear-left"></div>
             <div className="mt-12">
               <img src="/blank_profile.png"alt="LHU Logo" className="w-1/6 outline outline-rose-900 outline-4 float-left mr-10"/>
               <h3 className="text-2xl font-bold text-stone-500">Angel Mandoza</h3>
-              <p className="text-md">Computer Science,I joined Act101 because I was once a mentee and saw the amount of good I can do for this program. 
-              The best part about mentoring is being that resource that mentees can depend on.</p>
+              <p className="text-md">Computer Science, I joined Act101 because I was once a mentee and saw the amount of good I could do for this program. 
+              The best part about mentoring is being a resource that mentees can depend on, like my mentor was to me.</p>
             </div>
           </div>
         </div>
