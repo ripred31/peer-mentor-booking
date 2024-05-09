@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from './Button';
+import dayjs from 'dayjs';
 
 export default function SelectedBooking({ bookingId }) {
     const [booking, setBooking] = useState(null);
@@ -47,7 +48,7 @@ export default function SelectedBooking({ bookingId }) {
                 <strong>Mentor Name:</strong> {booking.name}<br />
                 <strong>Mentor Email:</strong> {booking.email}<br />
                 <strong>Location:</strong> {booking.location}<br />
-                <strong>Date:</strong> {booking.date}<br />
+                <strong>Date:</strong> {dayjs(booking.date).format('ddd, DD MMM YYYY')}<br />
                 <strong>Time:</strong> {booking.time}<br />
                 <strong>Status:</strong> {booking.status}<br />
                 <strong>Area of Expertise:</strong> {booking.areaOfExpertise}<br />

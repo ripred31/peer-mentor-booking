@@ -52,7 +52,7 @@ export default function BookingTable({ userId, selectedDate, selectedBookingId, 
                 >
                     <div className='flex'>
                         <label className='text-md font-bold mr-4'>Date:</label>
-                        <p>{booking.date} - {booking.time}</p>
+                        <p>{dayjs(booking.date).format('ddd, DD MMM YYYY')} - {booking.time}</p>
                     </div>
                     <div className='flex'>
                         <label className='text-md font-bold mr-4'>Location:</label>
